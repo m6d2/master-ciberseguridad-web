@@ -6,7 +6,7 @@ import play.mvc.*;
 
 import java.util.List;
 
-public class Application extends Controller {
+public class Application extends Secure {
 
     private static void checkTeacher(){
         checkUser();

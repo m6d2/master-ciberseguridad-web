@@ -5,7 +5,7 @@ import helpers.HashUtils;
 import models.User;
 import play.mvc.Controller;
 
-public class PublicContentBase extends Controller {
+public class PublicContentBase extends Secure {
 
     public static void register(){
         render();
