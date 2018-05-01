@@ -6,9 +6,10 @@ import play.mvc.*;
 
 import java.util.List;
 
-public class Application extends Secure {
+@With(Secure.class)
+public class Application extends Controller {
 
-    private static void checkTeacher(){
+    private static void checkTeacher() throws Throwable {
         checkUser();
 
         User u = (User) renderArgs.get("user");
@@ -17,7 +18,7 @@ public class Application extends Secure {
         }
     }
 
-    private static void checkUser(){
+    private static void checkUser() throws Throwable {
         if (session.contains("username")){
             User u = User.loadUser(session.get("username"));
             if (u != null){
@@ -28,7 +29,7 @@ public class Application extends Secure {
         Secure.login();
     }
 
-    public static void index() {
+    public static void index() throws Throwable {
         checkUser();
 
         User u = (User) renderArgs.get("user");
@@ -42,7 +43,7 @@ public class Application extends Secure {
     }
 
 
-    public static void removeStudent(String student) {
+    public static void removeStudent(String student) throws Throwable {
         checkTeacher();
 
         User.remove(student);
@@ -55,7 +56,7 @@ public class Application extends Secure {
         render(u);
     }
 
-    public static void doSetMark(String student, Integer mark) {
+    public static void doSetMark(String student, Integer mark) throws Throwable {
         User u = User.loadUser(student);
         u.setMark(mark);
         u.save();
